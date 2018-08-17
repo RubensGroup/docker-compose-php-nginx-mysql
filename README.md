@@ -19,12 +19,11 @@ Instancias Docker:
 >   - _php-app_ Aplicación pura PhP, en este caso es un único archivo, con la ipresión de los modulos y la info de mi instalación PHP.
 >   - _codeigniter-php-app_ App para descarga de Framework Codeigniter y ejecución
 
-#### Clonación de proyecto Codeigniter
-El proyecto debe ser clonado en la carpeta _codeigniter-php-app_
+#### Descargar el contenido del SubModulo Codeigniter
+Por defecto un **Clon/Pull** del repositorio, no descarga el contenido de un SubModulo, se debe descargar por comando o interfaz.
 ```sh
-git submodule add https://github.com/bcit-ci/CodeIgniter.git projects/codeigniter-php-app
+git submodule update --init
 ```
-
 ### Ejecución del Compose
 Construcción de las imágenes Docker
 ```sh
@@ -32,6 +31,12 @@ docker-compose build
 docker-compose up -d
 #Si no funciona Correctamente PHP MyAdmin, debemos reiniciar El Docker
 docker-compose restart phpmyadmin
+```
+
+###### Agregar un proyecto Codeinginter Existente(Agregar más submodulos)
+Si se desea agregar proyectos existemtes Codeigniter a la carpeta _projects_ para efectos de pruebas:
+```sh
+git submodule add https://[ServidorGit]/[Owner]/[My Project].git projects/[My Project]
 ```
 
 Referencias:
