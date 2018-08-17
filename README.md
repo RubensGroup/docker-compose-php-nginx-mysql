@@ -22,7 +22,7 @@ Instancias Docker:
 #### Clonación de proyecto Codeigniter
 El proyecto debe ser clonado en la carpeta _codeigniter-php-app_
 ```sh
-git clone https://github.com/bcit-ci/CodeIgniter.git projects/codeigniter-php-app
+git submodule add https://github.com/bcit-ci/CodeIgniter.git projects/codeigniter-php-app
 ```
 
 ### Ejecución del Compose
