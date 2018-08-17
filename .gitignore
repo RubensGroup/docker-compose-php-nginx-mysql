@@ -16,6 +16,7 @@ application/logs/*
 !application/logs/.htaccess
 /vendor/
 
+#Custom exclude files and folders
 #Exclude all .conf custom for sites-available
 nginx/sites-available/*.conf   
 
