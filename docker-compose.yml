@@ -1,0 +1,55 @@
+version: '2'
+services:
+  web:
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+    #Volume for Code Projects
+      - ./projects:/projects
+      - ./nginx/sites-available:/etc/nginx/conf.d
+    links:
+      - php
+
+  php:
+    build: ./php
+    volumes:
+      - ./projects:/projects
+    links:
+      - mysql
+
+  mysql:
+    #Version > 5.7 Not work whit this configuration
+    image: ./mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: mysqldb_docker
+      MYSQL_USER: user_mysql
+      MYSQL_PASSWORD: password_mysql
+      MYSQL_ROOT_PASSWORD: password_mysql_admin
+    # volumes:
+        # - ./dump:/docker-entrypoint-initdb.d
+        # - persistent:/var/lib/mysql
+    networks:
+      - default
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    links:
+      - mysql:db
+    ports:
+      - 8082:80
+    environment:
+      MYSQL_USER: user_mysql
+      MYSQL_PASSWORD: password_mysql
+      MYSQL_ROOT_PASSWORD: password_mysql_admin
+      PMA_USER: root
+      PMA_PASSWORD: password_mysql_admin
+      #To set manual conection to BD
+      # PMA_ARBITRARY: 1
+    restart: always
+    networks:
+      - default
